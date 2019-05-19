@@ -11,8 +11,28 @@
 ssh pi@192.168.1.124
 ```
 
+If it's on `Ellipsis Jetpack 15BF`:
+
+```
+ssh pi@192.168.1.11
+```
+
+
+Wifi notes: Setting WiFi up via the command line
+https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+
+
+Ellipsis Jetpack 15BF
+
+
 ```
 $ python a.py
+```
+
+This was a good attempt - but didn't work:
+
+```
+./usbrawserial /dev/ttyACM0
 ```
 
 
@@ -21,6 +41,9 @@ $ python a.py
 $ cd ~/mycar/
 $ python manage.py drive
 ```
+
+http://192.168.1.124:8887
+http://192.168.1.11:8887
 
 
 ## References
