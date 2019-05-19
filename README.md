@@ -5,6 +5,21 @@
 
 [![Watch the video](images/first-drive.png)](https://www.youtube.com/watch?v=y7wChCVcuVY)
 
+## What
+
+A shield that adds a GPS, a gyro, PWM monitors and a distance sensor
+
+![](arduino/donkeybounceshield_bb.png)
+
+The schematic
+
+![](arduino/donkeybounceshield_schem.png)
+
+The Shield
+
+![](arduino/donkeybounceshield_pcb.png)
+
+
 ## How to
 
 ```
@@ -45,6 +60,9 @@ $ python manage.py drive
 http://192.168.1.124:8887
 http://192.168.1.11:8887
 
+## GPS
+
+* GPS Receiver - LS20031 5Hz ([1](https://www.sparkfun.com/products/8975), [2](https://learn.sparkfun.com/tutorials/ls20031-5hz-66-channel-gps-receiver-hookup-guide?_ga=2.230844831.1449235539.1558239626-1152025920.1554262143), [3](https://cdn.sparkfun.com/datasheets/GPS/LS20030~3_datasheet_v1.3.pdf))
 
 ## References
 
