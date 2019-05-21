@@ -19,6 +19,8 @@ The Shield
 
 ![](arduino/donkeybounceshield_pcb.png)
 
+You can find details about the PCB [here](https://oshpark.com/shared_projects/IXQhfZmE).
+
 
 ## How to
 
