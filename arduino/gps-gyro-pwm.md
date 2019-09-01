@@ -1,6 +1,18 @@
 # Donkeycar
 
 
+## Todo
+
+https://sketchfab.com/3d-models/red-dragon-ac2edeb01b9a4d4796c4d34f5d8aa1f2
+
+https://learn.adafruit.com/bno055-absolute-orientation-sensor-with-raspberry-pi-and-beaglebone-black?view=all#software
+
+https://learn.adafruit.com/assets/24667
+
+https://github.com/lookfwd/donkeybouncecar
+
+
+
 ## Video
 
 [![Watch the video](images/first-drive.png)](https://www.youtube.com/watch?v=y7wChCVcuVY)
