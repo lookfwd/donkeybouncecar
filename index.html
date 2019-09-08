@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebSocket demo</title>
+        <!-- Based on https://websockets.readthedocs.io/en/stable/intro.html -->
+    </head>
+    <body>
+        <canvas id="stage" width="200" height="200"></canvas>
+        <script>
+
+            function draw(throttle, steering){
+              var canvas = document.getElementById('stage');
+              if (canvas.getContext){
+                var ctx = canvas.getContext('2d');
+
+
+                function fill(offsety, pc) {
+                    ctx.fillStyle = "#D74022";
+                    x0 = 12;
+                    height = 60;
+                    width = 150;
+                    ctx.clearRect(x0,offsety,width,height);
+                    tw = (pc>0?pc:-pc) * (width/2) / 100
+                    if (pc > 0) {
+                        t0 = (width / 2);
+                    }
+                    else {
+                        t0 = (width / 2) - tw;
+                    }
+                    t0 = t0 < 0? 0 : t0;
+                    tw = tw>(width/2)?(width/2):tw;
+                    ctx.fillRect (x0 + t0, offsety, tw, height);
+                    ctx.strokeRect(x0, offsety, width, height);
+                }
+                fill(12, throttle);
+                fill(100, steering);
+
+                // ctx.fillStyle = "rgba(0,0,0,0.5)";
+                // ctx.clearRect(60,60,120,120);
+                // ctx.strokeRect(90,90,80,80);
+                
+                // ctx.beginPath();
+                // ctx.moveTo(0, 0);
+                // ctx.lineTo(300, 150);
+                // ctx.stroke();
+              }
+            }
+
+
+            var messages = document.createElement('ul');
+            document.body.appendChild(messages);
+            var messages = document.getElementsByTagName('ul')[0],
+                message = document.createElement('li'),
+                content = document.createTextNode(""),
+                message2 = document.createElement('li'),
+                content2 = document.createTextNode(""),
+                message3 = document.createElement('li'),
+            content3 = document.createTextNode("");
+            message.appendChild(content);
+            message2.appendChild(content2);
+            message3.appendChild(content3);
+            messages.appendChild(message);
+            messages.appendChild(message2);
+            messages.appendChild(message3);
+
+            var ws = new WebSocket("ws://127.0.0.1:5678/")
+            ws.onmessage = function (event) {
+                try {
+                    dt = JSON.parse(event.data);
+                    content2.nodeValue = dt.XRot;
+                    content3.nodeValue = dt.YRot;
+                    content.nodeValue = JSON.stringify(dt);
+                    
+                    throttle = (dt.Throttle - 1474) / 1;
+                    steering = -(dt.Steering - 1474) / 5;
+                    
+                    draw(throttle, steering);
+                }
+                catch {
+                    content.nodeValue = "Error";
+                }
+            };
+            
+        </script>
+    </body>
+</html>
