@@ -1,7 +1,10 @@
 # Donkey Bounce Car
 The Donkey Bounce Car is the [Donkey Car](https://www.donkeycar.com/) + super fancy extra hardware and software.
 
-## Video
+## Videos
+
+[![Watch the video](images/cpld-v2-design.png)](https://www.youtube.com/watch?v=cjI4cC8FCgs)
+
 
 [![Watch the video](images/first-drive.png)](https://www.youtube.com/watch?v=y7wChCVcuVY)
 
@@ -12,7 +15,7 @@ The second version of the Donkey Bounce Shield, uses a CPLD to accuratelly measu
 
 * You can find the PCB [here](https://oshpark.com/shared_projects/81d3538F).
 * You can find the CPLD design and JTAG files [here](shield/servo-reader-xc2c64a).
-* You can find the latest Arduino Sketch [here](shield/gps-gyro-pwm).
+* You can find the latest Arduino Sketch [here](shield/gps-gyro-pwm-sketch).
 * You can find the updated ServoTimer1 library [here](shield/ServoTimer1).
 
 The schematic
@@ -27,11 +30,11 @@ The Shield
 
 As soon as I started using the first version of the Donkey Bounce Shield, several limitations became aparent:
 
-1. Measuring the value of Servo, created by the Remote Control, was highly inaccurate. Even after using interrupts and any other technique the accuracy was bad.
-2. I could create PWM signals but I would have to manually unplug the Remote Control, when using them.
-3. When, after several modifications I was able to have arduino as man-in-the-middle, Donkey Car was making random small moves as inaccurate measurements where propagated to the PWM controller.
+1. Servo pulse width measurements were highly inaccurate. Even after using interrupts and other techniques the accuracy was bad.
+2. I would have to manually unplug the Remote Control signals in order to create control signals from Arduino.
+3. When, after several modifications I was able to have arduino as man-in-the-middle, between the RC and the motors, Donkey Car was making flaky small moves as inaccurate measurements where propagated to the PWM controller.
 
-The reason for inaccurate measurmeents was the sensitivity on interrupts. More specifically the `cli` command stops interrupts and it's used very often. For example, it's used by the `micros()` Arduino command and it's also very heavily used by the SoftwareSerial module. We need that module in order to read GPS signals.
+The reason for inaccurate measurements was the sensitivity on interrupts. More specifically the `cli` command stops interrupts and it's used very often. For example, it's used by the `micros()` Arduino command and it's also very heavily used by the SoftwareSerial module. We need that module in order to read GPS signals.
 
 Bottom line; In order to accurately read PWM signals you need to measure latencies with microsecond-level precision and an Arduino can't do that when it's as busy as it is in our case. I offloaded this work to [custom hardware and more specifically an XC2C64A Xilinx CPLD](servo-reader-xc2c64a).
 
