@@ -22,6 +22,10 @@ The schematic
 
 ![](shield/donkeybounceshield-v2_schem.png)
 
+or - 
+
+![](shield/schematic.png)
+
 The Shield
 
 ![](shield/donkeybounceshield-v2_pcb.png)

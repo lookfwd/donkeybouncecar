@@ -16,7 +16,7 @@
 
 #ifdef ENABLE_SONAR
 #include <NewPing.h>
-NewPing sonar(A0, A1);
+NewPing sonar(A1, A0);
 #endif  // ENABLE_SONAR
 
 #ifdef ENABLE_GYRO2
@@ -39,7 +39,7 @@ class ServoReader
 {
     const int PIN_CLK = 11;
     const int PIN_SCAN_EN = 13;
-    const int PIN_SCAN_OUT = 12;
+    const int PIN_SCAN_IN = 12;
     const char *STATES = "WRDO";  // Wait, Running, Done, Overflow
 
     static void clkStart()
@@ -92,7 +92,7 @@ class ServoReader
         Serial.println("Expected clock to be in PORTB");
         while (1);
       }
-      if (digitalPinToPort(PIN_SCAN_OUT) != 2) {
+      if (digitalPinToPort(PIN_SCAN_IN) != 2) {
         Serial.println("Expected scan_out to be in PORTB");
         while (1);
       }
@@ -104,7 +104,7 @@ class ServoReader
         Serial.println("Expected mask(clock) to be 8");
         while (1);
       }
-      if (digitalPinToBitMask(PIN_SCAN_OUT) != 16) {
+      if (digitalPinToBitMask(PIN_SCAN_IN) != 16) {
         Serial.println("Expected mask(scan_out) to be 16");
         while (1);
       }
@@ -121,7 +121,7 @@ class ServoReader
 
       pinMode(PIN_CLK, OUTPUT);
       pinMode(PIN_SCAN_EN, OUTPUT);
-      pinMode(PIN_SCAN_OUT, INPUT);
+      pinMode(PIN_SCAN_IN, INPUT);
 
       ServoValue sv[2];
       read(sv);  // At the end of read(), clock is (re)started
